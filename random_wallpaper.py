@@ -70,7 +70,7 @@ def parse_args() -> tuple[Path, TIMEFRAMES_VALUES]:
         nargs='?',
         default='.',
         type=str,
-        help='Path to directory in which wallapper should be saved',
+        help='Path to directory in which wallapper should be saved. Default: current working directory.',
         metavar='dir'
     )
     parser.add_argument(
@@ -79,7 +79,7 @@ def parse_args() -> tuple[Path, TIMEFRAMES_VALUES]:
         default='month',
         type=str,
         choices=TIMEFRAMES_VALUES,
-        help='Timeframe from which posts should be retrived',
+        help='Timeframe from which posts should be retrived. Default: "month".',
         metavar='timeframe'
     )
     args = parser.parse_args()
