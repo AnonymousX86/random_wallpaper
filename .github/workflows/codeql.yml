@@ -11,7 +11,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: [ 'self-hosted-ubuntu', 'self-hosted-windows' ]
+    runs-on: [ 'ubuntu-latest', 'windows-latest' ]
     timeout-minutes: 360
     permissions:
       actions: read
