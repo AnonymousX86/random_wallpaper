@@ -1,17 +1,17 @@
-name: "CodeQL"
+name: 'CodeQL'
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ 'master' ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ 'master' ]
   schedule:
     - cron: '22 14 * * 4'
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: 'ubuntu-latest'
+    runs-on: [ 'ubuntu-latest', 'windows-latest' ]
     timeout-minutes: 360
     permissions:
       actions: read
@@ -22,33 +22,32 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'python' ]
+        python-version: [ '3.10', '3.11', '3.12' ]
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup Python
+    - name: Setup Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5.0.0
       with:
-        python-version: |
-          3.10
-          3.11
-          3.12
+        python-version: ${{ matrix.python-version }}
         cache: pip
         architecture: x64
         check-latest: true
 
-    - run: pip install -r requirements.txt
+    - name: Install requirements
+      run: pip install -r requirements.txt
+
+    - name: Run Random Wallpaper
+      run: python radnom_wallpaper.py
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
 
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
-
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{matrix.language}}"
+        category: '/language:${{matrix.language}}'
