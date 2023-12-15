@@ -67,6 +67,8 @@ def parse_args() -> tuple[Path, TIMEFRAMES_VALUES]:
     parser = ArgumentParser(description='Saves random image from /r/wallaper')
     parser.add_argument(
         'save_to',
+        nargs='?',
+        default='.',
         type=str,
         help='Path to directory in which wallapper should be saved',
         metavar='dir'
