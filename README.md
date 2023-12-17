@@ -6,7 +6,7 @@ Downloads random wallpaper in directory.
 ## Usage
 
 ```text
-python random_wallpaper <dir> [timeframe]
+python random_wallpaper [dir] [timeframe]
 ```
 
 | Argument | Description |
